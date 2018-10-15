@@ -1,0 +1,11 @@
+{
+  "name": "credinomina_empleados",
+  "version": "1.0.0",
+  "description": "Simulador para evaluar credinomina de empleados BdV",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gabriel Lopez",
+  "license": "ISC"
+}
