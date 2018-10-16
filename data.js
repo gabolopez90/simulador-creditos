@@ -26,7 +26,7 @@ f.forEach(function(d){
     json.push(tmp);
 });
 
-console.log(json);
+module.exports = json;
 // var outPath = path.join(__dirname, 'PATH_TO_JSON');
 // Convert object to string, write json to file
 // fs.writeFileSync(outPath, JSON.stringify(json), 'utf8',
