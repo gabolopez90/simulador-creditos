@@ -1,0 +1,13 @@
+.jumbotron{
+	background-color: white;
+}
+
+form{
+	width: 30%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+[type='radio'] {
+visibility: hidden;
+}
