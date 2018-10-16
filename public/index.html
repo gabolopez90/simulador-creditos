@@ -13,26 +13,26 @@
 			<h1 class="text-center">Simulador Credinómina Empleados BdV</h1>
 		</div>
 
-		<div class="container">
-			<form class="form">
-				<div class="form-group">
-					<label for="ci">Ingrese Cédula de Identidad</label>
-					<div class="input-group">
-						<div class="dropdown input-group-prepend">
-							  <button class="btn btn-secondary dropdown-toggle btn-outline-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							    -
-							  </button>
-							  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-										<label class="dropdown-item"><input type="radio" name="nac" href="#" id="ve" value="V" active>V</label>
-										<label class="dropdown-item"><input type="radio" name="nac" href="#" id="ex" value="E">E</label>
-								</div>
-						</div>
-						<input class="form-control" type="text" name="ci" id="ci" placeholder="..." maxlength="8">
+		<div class="container forma">
+			<form method="post" action="/"> 
+			<div class="form-group">
+				<label for="ci">Ingrese Cédula de Identidad</label>
+				<div class="input-group">
+					<div class="dropdown input-group-prepend">
+						  <button class="btn btn-secondary dropdown-toggle btn-outline-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						    -
+						  </button>
+						  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+									<label class="dropdown-item"><input type="radio" name="nac" href="#" id="ve" value="V" active>V</label>
+									<label class="dropdown-item"><input type="radio" name="nac" href="#" id="ex" value="E">E</label>
+							</div>
 					</div>
+					<input class="form-control" type="text" name="ci" id="ci" placeholder="..." maxlength="8">
 				</div>
-				<div class="form-group">
-					<button class="btn btn-secondary" type="submit" id="consultar">Consultar</button>
-				</div>
+			</div>
+			<div class="form-group">
+				<button class="btn btn-secondary" type="submit" id="consultar" value="send">Consultar</button>
+			</div>
 			</form>
 		</div>
 
