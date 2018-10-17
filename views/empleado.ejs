@@ -1,0 +1,64 @@
+<!Doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Simulador Credinomina Empleados BdV</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="css/styles.css">
+		<link rel="shortcut icon" href="img/icon.JPG">
+	</head>
+	<body>
+		<!-- <div class="alert alert-danger text-center" role="alert">
+			<strong>¡Base de datos no actualizada!</strong>
+		</div>	 -->
+		
+		<div class="jumbotron">
+			<img src="img/logo_bdv.jpg">
+			<h1 class="text-center">Simulador Credinómina Empleados BdV</h1>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="offset-2 col-8">
+					<div class="card border-secondary">
+						<h3 class="card-header bg-secondary text-white text-center"><%= data.NOMBRE %></h3>
+						<div class="card-body">
+							<p><strong>Cargo: </strong><%= data.CARGO %></p>
+							<p><strong>Salario: </strong>Bs. <%= data.SALARIO %></p>
+							<p><strong>Fecha de Ingreso: </strong><%= data.FECHA_ING %></p>
+							<p><strong>Tasa: </strong><%= Math.floor(Number(data.TASA.replace(",","."))*100) %>%</p>
+							<p><strong>% de endeudamiento: </strong><%= data.ENDEUDAMIENTO  %> </p>
+							<h5 class="text-center">Credinomina</h5>
+							<p><strong>Saldo credinómina consolidado: </strong>Bs. <%= data.SALDO_CREDINOMINA %></p>
+							<p><strong>Pago mínimo credinómina consolidado: </strong>Bs. <%= data.CUOTA_CREDINOMINA %></p>
+							<h5 class="text-center">TDC</h5>
+							<p><strong>Saldo TDC consolidado: </strong>Bs. <%= data.SALDO_CONS_TDC %></p>
+							<p><strong>Pago mínimo TDC consolidado: </strong>Bs. <%= data.PAGO_MIN_TDC %></p>
+							<h4 class="text-center"><strong>Monto Aprobado:</strong> Bs. 
+								<% if(data.MONTO_SOLICITADO < data.CREDINOMINA_DISPONIBLE) { %>
+									<%= Math.floor(data.MONTO_SOLICITADO) %>
+								<% } else{ %>
+									<%= data.CREDINOMINA_DISPONIBLE %>
+								<% } %></h4>
+						</div>
+						<div class="card-footer text-center">
+							<p>Fecha de Información: <%= data.FECHA_INFORMACION %></p>
+						</div>
+					</div>
+				</div>
+				
+			</div>			
+			<div class="text-center mt-4 mb-4">
+				<a href=""><button class="btn btn-secondary">Volver al inicio</button></a>	
+			</div>
+			
+		</div>
+
+
+
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    	<script type="text/javascript" src="js/script.js"></script>
+	</body>
+</html>
