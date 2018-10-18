@@ -10,9 +10,14 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 app.set("view engine", "ejs");
 app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));
-
+app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js')); // redirect bootstrap JS
+app.use('/js', express.static(__dirname + '/node_modules/jquery/dist')); // redirect JS jQuery
+app.use('/js', express.static(__dirname + '/node_modules/popper.js/dist/umd')); // redirect JS popper
+app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css')); // redirect CSS bootstrap
+app.use('/css', express.static(__dirname + '/node_modules/font-awesome/css')); // redirect CSS font-awesome
+app.use('/fonts', express.static('./node_modules/font-awesome/fonts'))
 //Recibe y procesa los datos ingresados por el usuario
-app.post("/", urlencodedParser, (req,res,next)=>{ 
+app.post("/", urlencodedParser, (req,res,next)=>{
 	var nac = req.body.nac;
 	var ci = req.body.ci;
 	var solicitado = req.body.solicitado;
@@ -25,7 +30,7 @@ app.post("/", urlencodedParser, (req,res,next)=>{
 	}
 
 	//Une la nacionalidad con la cedula creando una variable alfanumerica 9 para la comparacion
-	var cedula = nac + ci;		
+	var cedula = nac + ci;
 	//Busca la cedula ingresada en la base de datos
 	var empleado = db.find((o) =>{
 		return o.CEDULA == cedula;
@@ -36,12 +41,11 @@ app.post("/", urlencodedParser, (req,res,next)=>{
 	}
 	else{
 		empleado.CREDINOMINA_DISPONIBLE = Math.floor(Number(empleado.SALARIO.replace(".","").replace(",",".")) * 8 - Number(empleado.SALDO_CREDINOMINA.replace(".","").replace(",",".")));
-		console.log(empleado.CREDINOMINA_DISPONIBLE);
 		empleado.MONTO_SOLICITADO = solicitado;
 		res.render("empleado", {data: empleado});
 	}
 });
-			
+
 //Inicia el servidor en el puerto 8080
 app.listen(8080);
 console.log("listening on port "+ 8080);
