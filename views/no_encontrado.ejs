@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Simulador Credinomina Empleados BdV</title>
+		<title>Simulador Credinomina BdV</title>
 		<link rel="stylesheet" href="css\bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="css/styles.css">
@@ -15,21 +15,24 @@
 
 		<div class="jumbotron">
 			<img src="img/logo_bdv.jpg">
-			<h1 class="text-center">Simulador Credinómina Empleados BdV</h1>
+			<h1 class="text-center">Simulador Credinómina BdV</h1>
 		</div>
 
 		<div class="container">
 			<div class="row">
-				<h2 class="text-center">Empleado no encontrado</h2>
-				<p>Lo sentimos, el empleado <strong><%= data %></strong> no pudo ser encontrado, por favor revisar que introdujo bien la cédula. Gracias.</p>
+				<h2 class="text-center">Cédula no encontrada</h2>
+				<h5 class=" mt-4 ml-4 mr-4">Lo sentimos, la cédula <strong><%= data %></strong> no pudo ser encontrada, por favor revisar que la introdujo bien e intente de nuevo. Gracias.</h5>
 			</div>
-			<a href=""><button class="btn btn-secondary">Volver al inicio</button></a>
+			<div class="mt-4">
+				<a href="/simulador_empleado"><button class="btn btn-secondary">Volver al inicio</button></a>
+				<a href="/"><button class="btn btn-primary"><i class="fa fa-home"></i> Página principal</button></a>
+			</div>
 		</div>
 
 
 
 		<script src="js/jquery.slim.min.js"></script>
-    <script src="js/popper.min.js"></script>
+    	<script src="js/popper.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/script.js"></script>
 	</body>
