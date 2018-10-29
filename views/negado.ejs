@@ -1,0 +1,80 @@
+<!Doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Simulador Credinomina BdV</title>
+		<link rel="stylesheet" href="css\bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="css/styles.css">
+		<link rel="shortcut icon" href="img/icon.JPG">
+	</head>
+	<body>
+		<% if(data.ACTUALIZADO == "FALSE") { %>
+			<div class="alert alert-danger text-center" role="alert" id="noActualizado">
+				<strong>¡Base de datos no actualizada!</strong>
+			</div>	
+		<% } else if (data.ACTUALIZADO == "NP"){ %>
+			<div class="alert alert-warning text-center" role="alert" id="np">
+				<strong>No posee activos con el banco</strong>
+			</div>			
+		<% } %>
+
+		<div class="container">
+			<img src="img/logo_bdv.jpg">
+			<h1 class="text-center">Simulador Credinómina BdV</h1>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="offset-2 col-8">
+					<div class="card border-secondary">
+						<h3 class="card-header bg-secondary text-white text-center"><%= data.NOMBRE %></h3>
+						<div class="card-body">
+							<p><strong>Cédula: </strong><%= data.CEDULA %></p>
+							<p><strong>Cargo: </strong><%= data.CARGO %></p>
+							<p><strong>Salario: </strong>Bs. <span id="salario"><%= data.SALARIO %></span></p>
+							<p><strong>Fecha de Ingreso: </strong><%= data.FECHA_ING %></p>
+							<p><strong>Tasa: </strong><span id="tasa" ><%= Math.floor(Number(data.TASA.replace(",","."))*100) %>%</span></p>
+							<p><strong>% de endeudamiento: </strong><span id="endeudamiento"><%= data.ENDEUDAMIENTO  %></span> </p>
+							<p><strong>Pago mínimo consolidado: Bs.</strong> <span id="pago-min-viejo"><%= data.PAGO_MIN %></span></p>
+							<h5 class="text-center">Credinomina</h5>
+							<p><strong>Saldo credinómina consolidado: </strong>Bs. <span id="saldo_credinomina"><%= data.SALDO_CREDINOMINA %></span></p>
+							<p><strong>Pago mínimo credinómina consolidado: </strong>Bs. <%= data.CUOTA_CREDINOMINA %></p>
+							<h5 class="text-center">TDC</h5>
+							<p><strong>Saldo TDC consolidado: </strong>Bs. <%= data.SALDO_CONS_TDC %></p>
+							<p><strong>Pago mínimo TDC consolidado: </strong>Bs. <%= data.PAGO_MIN_TDC %></p>
+							<h4> <strong>Decisión:</strong> <span class="badge badge-danger">Negado</span></h4>
+							<h5><strong>Monto solicitado: </strong> Bs. <span id="solicitado"><%= data.MONTO_SOLICITADO %></span></h5>
+							<h4 class="text-center"><strong>Detalle Negado:</strong> <span class="badge badge-danger"><%= data.NEGADO_DETALLE %></span></h4>
+							<button class="btn btn-info" id="sobregiro">Eliminar sobregiro TDC</button>
+							<div class="" id="nuevo-pago-min">
+								<h5>Ingrese monto en Bs. del sobregiro:</h5>
+								<div class="input-group">
+									<input type="number" name="sobregiro" id="monto-sobregiro">
+									<button class="btn btn-secondary input-group-append" id="recalcular">Recalcular</button>
+								</div>
+								<h4 class="text-center"><strong>Monto Aprobado Recalculado:</strong> <span id="recalculado" class="badge badge-info"></span></h4>
+							</div>
+							
+						</div>
+						<div class="card-footer text-center">
+							<p>Fecha de Información: <%= data.FECHA_INFORMACION %></p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="text-center mt-4 mb-4">
+				<a href="/simulador_empleado"><button class="btn btn-secondary">Volver al inicio</button></a>
+			</div>
+
+		</div>
+
+
+
+		<script src="js/jquery.slim.min.js"></script>
+    	<script src="js/popper.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+    	<script type="text/javascript" src="js/script.js"></script>
+	</body>
+</html>
