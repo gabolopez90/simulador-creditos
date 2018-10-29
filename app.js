@@ -1,10 +1,15 @@
 //Declara los modulos utilizados
 //Express para manejar las conexiones, body-parser para manejar la data ingresada por el usuario y ejs para la presentacion
+//OS obtiene información del equipo del usuario
 var express = require("express");
 var app = express();
 const bodyParser = require("body-parser");
 var db = require("./data.js");
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
+var os = require('os');
+
+//Obtiene nm del usuario
+var user = os.userInfo().username;
 
 //Usa express para servir el contenido estatico. Define a ejs como el programa para la visualizacion
 app.set("view engine", "ejs");
@@ -15,9 +20,18 @@ app.use('/js', express.static(__dirname + '/node_modules/jquery/dist')); // redi
 app.use('/js', express.static(__dirname + '/node_modules/popper.js/dist/umd')); // redirect JS popper
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css')); // redirect CSS bootstrap
 app.use('/css', express.static(__dirname + '/node_modules/font-awesome/css')); // redirect CSS font-awesome
-app.use('/fonts', express.static('./node_modules/font-awesome/fonts'))
+app.use('/fonts', express.static('./node_modules/font-awesome/fonts')) // redirect CSS font-awesome
+
+app.get("/simulador_empleado", (req,res,next)=>{
+	res.render("simulador_empleado");
+});
+
+app.get("/simulador_global", (req,res,next)=>{
+	res.render("simulador_global");
+});
+
 //Recibe y procesa los datos ingresados por el usuario
-app.post("/", urlencodedParser, (req,res,next)=>{
+app.post("/empleado", urlencodedParser, (req,res,next)=>{
 	var nac = req.body.nac;
 	var ci = req.body.ci;
 	var solicitado = req.body.solicitado;
@@ -35,14 +49,21 @@ app.post("/", urlencodedParser, (req,res,next)=>{
 	var empleado = db.find((o) =>{
 		return o.CEDULA == cedula;
 	});
-	// Si no es empleado, devuelve una pagina de error, si es empleado muestra la informacion
+
+		// Si no es empleado, devuelve una pagina de error, si es empleado muestra la informacion
 	if(empleado === undefined){
 		res.render("no_encontrado", {data: cedula});
 	}
 	else{
-		empleado.CREDINOMINA_DISPONIBLE = Math.floor(Number(empleado.SALARIO.replace(".","").replace(",",".")) * 8 - Number(empleado.SALDO_CREDINOMINA.replace(".","").replace(",",".")));
-		empleado.MONTO_SOLICITADO = solicitado;
-		res.render("empleado", {data: empleado});
+		// if(empleado.CALIFICA === "SI" && empleado.APROBADO_DEF_FINAL !== "0,00"){		
+		if(empleado.NEGADO_DETALLE === "" && empleado.APROBADO_DEF_FINAL !== "0,00"){
+			empleado.MONTO_SOLICITADO = solicitado;			
+			res.render("empleado", {data: empleado});	
+		}
+		else{
+			empleado.MONTO_SOLICITADO = solicitado;
+			res.render("negado",{data: empleado});
+		}
 	}
 });
 
