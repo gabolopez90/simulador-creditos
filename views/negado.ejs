@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Simulador Credinomina BdV</title>
+		<title>Simulador Credinomina Empleados BdV</title>
 		<link rel="stylesheet" href="css\bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="css/styles.css">
@@ -21,7 +21,7 @@
 
 		<div class="container">
 			<img src="img/logo_bdv.jpg">
-			<h1 class="text-center">Simulador Credinómina BdV</h1>
+			<h1 class="text-center">Simulador Credinomina Empleados BdV</h1>
 		</div>
 
 		<div class="container">
@@ -46,14 +46,36 @@
 							<h4> <strong>Decisión:</strong> <span class="badge badge-danger">Negado</span></h4>
 							<h5><strong>Monto solicitado: </strong> Bs. <span id="solicitado"><%= data.MONTO_SOLICITADO %></span></h5>
 							<h4 class="text-center"><strong>Detalle Negado:</strong> <span class="badge badge-danger"><%= data.NEGADO_DETALLE %></span></h4>
+
+							<!-- Ingresar datos manuales -->
 							<button class="btn btn-info" id="sobregiro">Eliminar sobregiro TDC</button>
+							<button class="btn btn-info" id="pago_min_manual">Pago mínimo TDC manual</button>
+
+							<!-- Sobregiro -->
 							<div class="" id="nuevo-pago-min">
 								<h5>Ingrese monto en Bs. del sobregiro:</h5>
 								<div class="input-group">
-									<input type="number" name="sobregiro" id="monto-sobregiro">
+									<div class="input-group-prepend">
+									  	<div class="input-group-text">Bs.</div>
+									</div>
+									<input type="number" name="sobregiro" id="monto-sobregiro" placeholder="0" min="0" value="0">
 									<button class="btn btn-secondary input-group-append" id="recalcular">Recalcular</button>
 								</div>
 								<h4 class="text-center"><strong>Monto Aprobado Recalculado:</strong> <span id="recalculado" class="badge badge-info"></span></h4>
+							</div>
+
+							<!-- Pago minimo manual -->							
+							<div class="" id="nuevo-pago-min-manual">
+								<p><strong>Pago mínimo sin TDC: </strong>Bs. <span id="pago-min-sin-tdc"><%= data.PAGO_MIN_SIN_TDC %></span></p>
+								<h5>Ingrese el nuevo pago mínimo TDC consolidado:</h5>
+								<div class="input-group">
+									<div class="input-group-prepend">
+									  	<div class="input-group-text">Bs.</div>
+									</div>
+									<input type="number" name="pago-min-manual" id="monto-pago-min-manual" placeholder="0" min="0" value="0">
+									<button class="btn btn-secondary input-group-append" id="recalcular-pago-min">Recalcular</button>
+								</div>
+								<h4 class="text-center"><strong>Monto Aprobado Recalculado:</strong> <span id="recalculado-pago-min" class="badge badge-info"></span></h4>
 							</div>
 							
 						</div>
