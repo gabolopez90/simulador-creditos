@@ -39,27 +39,49 @@
 							<p><strong>Pago mínimo consolidado: Bs.</strong> <span id="pago-min-viejo"><%= data.PAGO_MIN %></span></p>
 							<h5 class="text-center">Credinomina</h5>
 							<p><strong>Saldo credinómina consolidado: </strong>Bs. <span id="saldo_credinomina"><%= data.SALDO_CREDINOMINA %></span></p>
-							<p><strong>Pago mínimo credinómina consolidado: </strong>Bs. <%= data.CUOTA_CREDINOMINA %></p>
+							<p><strong>Pago mínimo credinómina consolidado: <span id="pago-min-credinomina"></strong>Bs. <%= data.CUOTA_CREDINOMINA %></span></p>
 							<h5 class="text-center">TDC</h5>
 							<p><strong>Saldo TDC consolidado: </strong>Bs. <%= data.SALDO_CONS_TDC %></p>
 							<p><strong>Pago mínimo TDC consolidado: </strong>Bs. <%= data.PAGO_MIN_TDC %></p>
 							<h4> <strong>Decisión:</strong> <span class="badge badge-success">Aprobado</span></h4>
 							<h5><strong>Monto solicitado: </strong> Bs. <span id="solicitado"><%= data.MONTO_SOLICITADO %></span></h5>
 							<h4 class="text-center"><strong>Monto Aprobado:</strong> <span class="badge badge-success"> Bs. 
-								<% if(parseInt(data.MONTO_SOLICITADO) < parseInt(data.APROBADO_DEF_FINAL)) { %>
+								<span id="monto_aprobado_empleado"><% if(parseInt(data.MONTO_SOLICITADO) < parseInt(data.APROBADO_DEF_FINAL)) { %>
 									<%= Math.floor(data.MONTO_SOLICITADO) %>
 								<% } else { %>
 									<%= data.APROBADO_DEF_FINAL %>
-								<% } %>								
+								<% } %></span>								
 							</span></h4>
-							<button class="btn btn-primary" id="sobregiro">Eliminar sobregiro TDC</button>
+
+							<!-- Ingresar datos manuales -->
+							<button class="btn btn-info" id="sobregiro">Eliminar sobregiro TDC</button>
+							<button class="btn btn-info" id="pago_min_manual">Pago mínimo TDC manual</button>
+
+							<!-- Sobregiro -->							
 							<div class="" id="nuevo-pago-min">
-								<h5>Ingrese monto en Bs. del sobregiro:</h5>
+								<h5>Ingrese monto del sobregiro:</h5>
 								<div class="input-group">
-									<input type="number" name="sobregiro" id="monto-sobregiro">
+									<div class="input-group-prepend">
+									  	<div class="input-group-text">Bs.</div>
+									</div>
+									<input type="number" name="sobregiro" id="monto-sobregiro" placeholder="0" min="0" value="0">
 									<button class="btn btn-secondary input-group-append" id="recalcular">Recalcular</button>
 								</div>
 								<h4 class="text-center"><strong>Monto Aprobado Recalculado:</strong> <span id="recalculado" class="badge badge-info"></span></h4>
+							</div>
+
+							<!-- Pago minimo manual -->							
+							<div class="" id="nuevo-pago-min-manual">
+								<p><strong>Pago mínimo sin TDC: </strong>Bs. <span id="pago-min-sin-tdc"><%= data.PAGO_MIN_SIN_TDC %></span></p>
+								<h5>Ingrese el nuevo pago mínimo TDC consolidado:</h5>
+								<div class="input-group">
+									<div class="input-group-prepend">
+									  	<div class="input-group-text">Bs.</div>
+									</div>
+									<input type="number" name="pago-min-manual" id="monto-pago-min-manual" placeholder="0" min="0" value="0">
+									<button class="btn btn-secondary input-group-append" id="recalcular-pago-min">Recalcular</button>
+								</div>
+								<h4 class="text-center"><strong>Monto Aprobado Recalculado:</strong> <span id="recalculado-pago-min" class="badge badge-info"></span></h4>
 							</div>
 						</div>
 						<div class="card-footer text-center">
