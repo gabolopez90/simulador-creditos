@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 var db = require("./data.js");
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var os = require('os');
+var fs = require("fs");
 
 //Obtiene nm del usuario
 var user = os.userInfo().username;
@@ -54,18 +55,31 @@ app.post("/empleado", urlencodedParser, (req,res,next)=>{
 	if(empleado === undefined){
 		res.render("no_encontrado", {data: cedula});
 	}
-	else{
-		// if(empleado.CALIFICA === "SI" && empleado.APROBADO_DEF_FINAL !== "0,00"){		
-		if(empleado.NEGADO_DETALLE === "" && empleado.APROBADO_DEF_FINAL !== "0,00"){
-			empleado.MONTO_SOLICITADO = solicitado;			
-			res.render("empleado", {data: empleado});	
+	else{		
+		empleado.MONTO_SOLICITADO = solicitado;
+		if(empleado.NEGADO_DETALLE === "" && empleado.APROBADO_DEF_FINAL !== "0,00"){			
+			res.render("empleado", {data: empleado});
 		}
-		else{
-			empleado.MONTO_SOLICITADO = solicitado;
+		else{			
 			res.render("negado",{data: empleado});
 		}
 	}
 });
+
+app.post("/save", urlencodedParser, (req,res,next)=>{
+	var ci = req.body.ci;
+	var nombre = req.body.nombre;
+	var def = req.body.aprobado_def;
+	var solicitado = req.body.monto_solicitado;
+	var fecha = req.body.fecha;
+	var decision = req.body.decision;
+	var observacion = req.body.observacion;
+	var stream = fs.createWriteStream("data/evaluados.txt", {flags:'a'});
+	stream.write(nombre + ";" + solicitado + ";"+ def + ";" + fecha + ";" + decision + ";" + observacion + ";" + user + "\r\n");
+	stream.end();
+});
+
+
 
 //Inicia el servidor en el puerto 8080
 app.listen(8080);
