@@ -9,16 +9,16 @@
 		<link rel="shortcut icon" href="img/icon.JPG">
 	</head>
 	<body>
-		<div class="jumbotron">
-			<img src="img/logo_bdv.jpg">
-			<h1 class="text-center">Simulador Créditos BdV</h1>
+		<div class="jumbotron text-center color-banco" id="tope">
+			<img src="img/icon.jpg" class="img-thumbnail">
+			<h1>Simulador Créditos BdV</h1>
 		</div>
 
 		<div class="modal fade" role="dialog" id="presentacion">
 		  <div class="modal-dialog modal-lg" role="document">
 		    <div class="modal-content">
-		      <div class="modal-header">
-		      	<img src="img/icon.JPG">
+		      <div class="modal-header color-banco">
+		      	<img src="img/icon.JPG" class="img-thumbnail">
 		        <h4 class="modal-title">Crédito Evaluado</h4>
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span>
@@ -30,8 +30,8 @@
 		      	<p><strong>Tasa de interes anual: </strong> <span id="interes_final"></span>%</p>
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-arrow-left"></i> Simular de nuevo</button>
-		        <a href="/"><button type="button" class="btn btn-primary"><i class="fa fa-home"></i> Inicio</button></a>
+		        <button type="button" class="btn btn-banco" data-dismiss="modal"><i class="fa fa-arrow-left"></i> Simular de nuevo</button>
+		        <a href="/"><button type="button" class="btn btn-banco"><i class="fa fa-home"></i> Inicio</button></a>
 		      </div>
 		    </div>
 		  </div>
@@ -118,12 +118,12 @@
 				
 
 				<div class="form-group">
-					<button class="btn btn-secondary" type="submit" id="calcular" value="send"><i class="fa fa-calculator"></i> Calcular</button>
+					<button class="btn btn-banco" type="submit" id="calcular" value="send"><i class="fa fa-calculator"></i> Calcular</button>
 				</div>			
 		</div>
 
 		<div class="container text-center">
-			<a href="/"><button class="btn btn-primary mt-4"><i class="fa fa-home"></i> Página principal</button></a>
+			<a href="/"><button class="btn btn-banco mt-4"><i class="fa fa-home"></i> Página principal</button></a>
 		</div>
 
 		<script src="js/jquery.min.js"></script>
