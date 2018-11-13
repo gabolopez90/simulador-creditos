@@ -1,5 +1,6 @@
-.jumbotron{
-	background-color: white;
+.color-banco{
+	background-color: #D8130D;
+	color: white;	
 }
 
 .forma{
@@ -12,6 +13,20 @@
 visibility: hidden;
 }
 
-/*body{
-	background-color: #dcf2e9;
-}*/
+body{
+	color: #556F90;
+}
+
+.btn-banco{
+	background-color: #556F90;
+	color: white;
+}
+
+.btn-banco:hover{
+	background-color: #D8130D;
+}
+
+.card-banco{
+	background-color: #556F90;
+	color: white;
+}
