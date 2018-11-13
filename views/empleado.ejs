@@ -19,43 +19,39 @@
 			</div>			
 		<% } %>
 		
-		<div class="container">
-			<img src="img/logo_bdv.jpg">
-			<h1 class="text-center">Simulador Credinómina Empleados BdV</h1>
+		<div class="container-fluid text-center color-banco">
+			<img src="img/icon.jpg" class="img-thumbnail">
+			<h1>Simulador Credinómina Empleados BdV</h1>
 		</div>
+
 
 		<div class="container">
 			<div class="row">
 				<div class="offset-2 col-8">
 					<div class="card border-secondary">
-						<h3 class="card-header bg-secondary text-white text-center"><%= data.NOMBRE %></h3>
+						<h3 class="card-header card-banco text-center"><span id="nombre"><%= data.NOMBRE %></span></h3>
 						<div class="card-body">
-							<p><strong>Cédula: </strong><%= data.CEDULA %></p>
+							<p><strong>Cédula: </strong><span id="ci"><%= data.CEDULA %></span></p>
 							<p><strong>Cargo: </strong><%= data.CARGO %></p>
 							<p><strong>Salario: </strong>Bs. <span id="salario"><%= data.SALARIO %></span></p>
 							<p><strong>Fecha de Ingreso: </strong><%= data.FECHA_ING %></p>
 							<p><strong>Tasa: </strong><span id="tasa" ><%= Math.floor(Number(data.TASA.replace(",","."))*100) %>%</span></p>
 							<p><strong>% de endeudamiento: </strong><span id="endeudamiento"><%= data.ENDEUDAMIENTO  %></span> </p>
+							<p><strong>Otras deducciones mensuales: Bs.</strong> <span id="deducciones"><%= data.PAGO_MIN_SIN_TDC %></span></p>
 							<p><strong>Pago mínimo consolidado: Bs.</strong> <span id="pago-min-viejo"><%= data.PAGO_MIN %></span></p>
 							<h5 class="text-center">Credinómina</h5>
 							<p><strong>Saldo credinómina consolidado: </strong>Bs. <span id="saldo_credinomina"><%= data.SALDO_CREDINOMINA %></span></p>
-							<p><strong>Pago mínimo credinómina consolidado: <span id="pago-min-credinomina"></strong>Bs. <%= data.CUOTA_CREDINOMINA %></span></p>
 							<h5 class="text-center">TDC</h5>
 							<p><strong>Saldo TDC consolidado: </strong>Bs. <%= data.SALDO_CONS_TDC %></p>
 							<p><strong>Pago mínimo TDC consolidado: </strong>Bs. <%= data.PAGO_MIN_TDC %></p>
-							<h4> <strong>Decisión:</strong> <span class="badge badge-success">Aprobado</span></h4>
 							<h5><strong>Monto solicitado: </strong> Bs. <span id="solicitado"><%= data.MONTO_SOLICITADO %></span></h5>
-							<h4 class="text-center"><strong>Monto Aprobado:</strong> <span class="badge badge-success"> Bs. 
-								<span id="monto_aprobado_empleado"><% if(parseInt(data.MONTO_SOLICITADO) < parseInt(data.APROBADO_DEF_FINAL)) { %>
-									<%= Math.floor(data.MONTO_SOLICITADO) %>
-								<% } else { %>
-									<%= data.APROBADO_DEF_FINAL %>
-								<% } %></span>								
-							</span></h4>
+							<h4 class="text-center"><strong>Decisión: </strong><span class="badge badge-success" id="decision">Aprobado</span></h4>
+							<h4 class="text-center"><strong>Observación: </strong><span class="badge badge-success" id="observacion"><%= data.NEGADO_DETALLE %></span></h4>
+							
 
 							<!-- Ingresar datos manuales -->
-							<button class="btn btn-info" id="sobregiro">Eliminar sobregiro TDC</button>
-							<button class="btn btn-info" id="pago_min_manual">Pago mínimo TDC manual</button>
+							<button class="btn btn-banco" id="sobregiro">Eliminar sobregiro TDC</button>
+							<button class="btn btn-banco" id="pago_min_manual">Pago mínimo TDC manual</button>
 
 							<!-- Sobregiro -->							
 							<div class="" id="nuevo-pago-min">
@@ -65,9 +61,8 @@
 									  	<div class="input-group-text">Bs.</div>
 									</div>
 									<input type="number" name="sobregiro" id="monto-sobregiro" placeholder="0" min="0" value="0">
-									<button class="btn btn-secondary input-group-append" id="recalcular">Recalcular</button>
-								</div>
-								<h4 class="text-center"><strong>Monto Aprobado Recalculado:</strong> <span id="recalculado" class="badge badge-info"></span></h4>
+									<button class="btn btn-banco input-group-append" id="recalcular">Recalcular</button>
+								</div>								
 							</div>
 
 							<!-- Pago minimo manual -->							
@@ -79,10 +74,16 @@
 									  	<div class="input-group-text">Bs.</div>
 									</div>
 									<input type="number" name="pago-min-manual" id="monto-pago-min-manual" placeholder="0" min="0" value="0">
-									<button class="btn btn-secondary input-group-append" id="recalcular-pago-min">Recalcular</button>
-								</div>
-								<h4 class="text-center"><strong>Monto Aprobado Recalculado:</strong> <span id="recalculado-pago-min" class="badge badge-info"></span></h4>
+									<button class="btn btn-banco input-group-append" id="recalcular-pago-min">Recalcular</button>
+								</div>								
 							</div>
+							<h4 class="text-center"><strong>Monto Aprobado:</strong> <span class="badge badge-success"> Bs. 
+								<span id="monto_aprobado_empleado"><% if(parseInt(data.MONTO_SOLICITADO) < parseInt(data.APROBADO_DEF_FINAL)) { %>
+									<%= Math.floor(data.MONTO_SOLICITADO) %>
+								<% } else { %>
+									<%= data.APROBADO_DEF_FINAL %>
+								<% } %></span>								
+							</span></h4>
 						</div>
 						<div class="card-footer text-center">
 							<p>Fecha de Información: <%= data.FECHA_INFORMACION %></p>
@@ -91,11 +92,12 @@
 				</div>
 			</div>
 			<div class="text-center mt-4 mb-4">
-				<a href="/simulador_empleado"><button class="btn btn-secondary"><i class="fa fa-arrow-left"></i> Volver al inicio</button></a>
+				<a href="/simulador_empleado"><button class="btn btn-banco"><i class="fa fa-arrow-left"></i> Volver al inicio</button></a>
+				<a href="/simulador_empleado"><button class="btn btn-banco" id="save"><i class="fa fa-save"></i> Guardar</button></a>
 			</div>
 		</div>
 
-		<script src="js/jquery.slim.min.js"></script>
+		<script src="js/jquery.min.js"></script>
 	    <script src="js/popper.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 	    <script type="text/javascript" src="js/script.js"></script>
